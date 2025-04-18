@@ -94,4 +94,10 @@ impl VoiceCollection {
     pub(crate) fn clear(&mut self) {
         self.active_voice_count = 0;
     }
+    
+    pub fn set_block_size(&mut self, block_size: usize) {
+        self.voices.iter_mut().for_each(|v| {
+            v.set_block_size(block_size);
+        })
+    }
 }
