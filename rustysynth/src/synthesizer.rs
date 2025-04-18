@@ -19,28 +19,28 @@ use crate::voice_collection::VoiceCollection;
 #[derive(Debug)]
 #[non_exhaustive]
 pub struct Synthesizer {
-    pub(crate) sound_font: Arc<SoundFont>,
-    pub(crate) sample_rate: i32,
-    pub(crate) block_size: usize,
-    pub(crate) maximum_polyphony: usize,
+    pub sound_font: Arc<SoundFont>,
+    pub sample_rate: i32,
+    pub block_size: usize,
+    pub maximum_polyphony: usize,
 
-    preset_lookup: HashMap<i32, usize>,
-    default_preset: usize,
+    pub preset_lookup: HashMap<i32, usize>,
+    pub default_preset: usize,
 
-    channels: Vec<Channel>,
+    pub channels: Vec<Channel>,
 
-    voices: VoiceCollection,
+    pub voices: VoiceCollection,
 
-    block_left: Vec<f32>,
-    block_right: Vec<f32>,
+    pub block_left: Vec<f32>,
+    pub block_right: Vec<f32>,
 
-    inverse_block_size: f32,
+    pub inverse_block_size: f32,
 
-    block_read: usize,
+    pub block_read: usize,
 
-    master_volume: f32,
+    pub master_volume: f32,
 
-    effects: Option<Effects>,
+    pub effects: Option<Effects>,
 }
 
 impl Synthesizer {
