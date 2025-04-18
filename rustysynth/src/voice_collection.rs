@@ -7,13 +7,13 @@ use crate::voice::Voice;
 
 #[derive(Debug)]
 #[non_exhaustive]
-pub(crate) struct VoiceCollection {
+pub struct VoiceCollection {
     voices: Vec<Voice>,
     pub(crate) active_voice_count: usize,
 }
 
 impl VoiceCollection {
-    pub(crate) fn new(settings: &SynthesizerSettings) -> Self {
+    pub fn new(settings: &SynthesizerSettings) -> Self {
         let mut voices: Vec<Voice> = Vec::new();
         for _i in 0..settings.maximum_polyphony {
             voices.push(Voice::new(settings));
@@ -25,7 +25,7 @@ impl VoiceCollection {
         }
     }
 
-    pub(crate) fn request_new(
+    pub fn request_new(
         &mut self,
         region: &InstrumentRegion,
         channel: i32,
@@ -70,7 +70,7 @@ impl VoiceCollection {
         Some(&mut self.voices[candidate])
     }
 
-    pub(crate) fn process(&mut self, data: &[i16], channels: &[Channel]) {
+    pub fn process(&mut self, data: &[i16], channels: &[Channel]) {
         let mut i: usize = 0;
 
         loop {
@@ -87,11 +87,11 @@ impl VoiceCollection {
         }
     }
 
-    pub(crate) fn get_active_voices(&mut self) -> &mut [Voice] {
+    pub fn get_active_voices(&mut self) -> &mut [Voice] {
         &mut self.voices[0..self.active_voice_count]
     }
 
-    pub(crate) fn clear(&mut self) {
+    pub fn clear(&mut self) {
         self.active_voice_count = 0;
     }
     
