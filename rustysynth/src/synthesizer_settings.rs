@@ -52,7 +52,7 @@ impl SynthesizerSettings {
     }
 
     fn check_block_size(value: usize) -> Result<(), SynthesizerError> {
-        if !(8..=1024).contains(&value) {
+        if !(8..=2048).contains(&value) {
             return Err(SynthesizerError::BlockSizeOutOfRange(value));
         }
 
