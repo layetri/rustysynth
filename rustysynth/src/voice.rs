@@ -16,8 +16,8 @@ use crate::volume_envelope::VolumeEnvelope;
 #[derive(Debug)]
 #[non_exhaustive]
 pub(crate) struct Voice {
-    sample_rate: i32,
-    block_size: usize,
+    pub sample_rate: i32,
+    pub block_size: usize,
 
     vol_env: VolumeEnvelope,
     mod_env: ModulationEnvelope,
@@ -28,7 +28,7 @@ pub(crate) struct Voice {
     oscillator: Oscillator,
     filter: BiQuadFilter,
 
-    pub(crate) block: Vec<f32>,
+    pub block: Vec<f32>,
 
     // A sudden change in the mix gain will cause pop noise.
     // To avoid this, we save the mix gain of the previous block,
@@ -298,6 +298,11 @@ impl Voice {
         } else {
             self.vol_env.get_priority()
         }
+    }
+    
+    pub fn set_block_size(&mut self, block_size: usize) {
+        self.block_size = block_size;
+        self.block.resize(block_size, 0.0);
     }
 }
 
